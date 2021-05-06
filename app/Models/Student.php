@@ -25,4 +25,22 @@ class Student extends Model
     {
         return $this->hasMany(Enroll::class);
     }
+
+    public function insurance()
+    {
+
+        $enrollments = $this->enrrollments();
+        dd($enrollments);
+        $obj = [];
+        foreach ($enrollments as $enrollment) {
+            dd($enrollment);
+            array_push($obj, $enrollment);
+        }
+
+        dd($obj);
+
+        $current_enroll = max(array_column($enrollments->getResults(), 'start_date'));
+
+        return $current_enroll->insurance();
+    }
 }

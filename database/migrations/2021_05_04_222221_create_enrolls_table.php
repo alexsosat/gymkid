@@ -19,15 +19,15 @@ class CreateEnrollsTable extends Migration
             $table->date('end_date');
             $table->timestamps();
 
-            $table->unsignedBigInteger('student_id');
-            $table->unsignedBigInteger('schedule_id');
-            $table->unsignedBigInteger('insurance_id');
-            $table->unsignedBigInteger('parent_id');
+            $table->unsignedBigInteger('student_id')->nullable(false);
+            $table->unsignedBigInteger('schedule_id')->nullable(true);
+            $table->unsignedBigInteger('insurance_id')->nullable(true);
+            $table->unsignedBigInteger('tutor_id')->nullable(true);
 
-            $table->foreign('student_id')->references('id')->on('students');
-            $table->foreign('schedule_id')->references('id')->on('schedules');
-            $table->foreign('insurance_id')->references('id')->on('insurances');
-            $table->foreign('parent_id')->references('id')->on('parents');
+            $table->foreign('student_id')->references('id')->on('students')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('schedule_id')->references('id')->on('schedules')->onDelete('set null')->onUpdate('cascade');
+            $table->foreign('insurance_id')->references('id')->on('insurances')->onDelete('set null')->onUpdate('cascade');
+            $table->foreign('tutor_id')->references('id')->on('tutors')->onDelete('set null')->onUpdate('cascade');
         });
     }
 

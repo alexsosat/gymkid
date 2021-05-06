@@ -14,13 +14,13 @@ class CreateAttendancesTable extends Migration
     public function up()
     {
         Schema::create('attendances', function (Blueprint $table) {
-            $table->boolean('assisted');
+            $table->boolean('assisted')->default(false);
             $table->date('assisted_day');
             $table->timestamps();
 
-            $table->unsignedBigInteger('student_id');
+            $table->unsignedBigInteger('student_id')->nullable(false);
 
-            $table->foreign('student_id')->references('id')->on('students');
+            $table->foreign('student_id')->references('id')->on('students')->onDelete('cascade')->onUpdate('cascade');
         });
     }
 

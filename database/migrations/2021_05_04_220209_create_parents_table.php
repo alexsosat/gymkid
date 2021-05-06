@@ -13,18 +13,18 @@ class CreateParentsTable extends Migration
      */
     public function up()
     {
-        Schema::create('parents', function (Blueprint $table) {
+        Schema::create('tutors', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('surname');
-            $table->bigInteger('phone_prim');
-            $table->bigInteger('phone_sec');
+            $table->string('name')->nullable(false);
+            $table->string('surname')->nullable(false);
+            $table->string('phone_prim')->nullable(false);
+            $table->string('phone_sec')->nullable(true);
             $table->string('address');
             $table->timestamps();
 
-            $table->unsignedBigInteger('city_Id');
+            $table->unsignedBigInteger('city_Id')->nullable(true);
 
-            $table->foreign('city_Id')->references('id')->on('cities');
+            $table->foreign('city_Id')->references('id')->on('cities')->onDelete('set null')->onUpdate('cascade');
         });
     }
 
@@ -35,6 +35,6 @@ class CreateParentsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('parents');
+        Schema::dropIfExists('tutors');
     }
 }

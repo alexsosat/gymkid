@@ -43,28 +43,34 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>
-                                <div class="d-flex justify-content-around">
-                                    <a href="#editEmployeeModal" class="edit" data-toggle="modal">
-                                        <i class="material-icons" data-toggle="tooltip" title="Editar">&#xE254;</i>
-                                    </a>
-                                    <a href="#deleteEmployeeModal" class="delete" data-toggle="modal">
-                                        <i class="material-icons" data-toggle="tooltip" title="Eliminar">&#xE872;</i>
-                                    </a>
-                                </div>
-                            </td>
-                            <td><a href="AlumnoIndividual.html">Alex</a></td>
-                            <td>Sosa Trejo</td>
-                            <td>ISSTE</td>
-                            <td>Bolivar 906, Montemorelos, NL</td>
-                            <td>82633450</td>
-                            <td>5</td>
-                            <td>7-8</td>
-                            <td>Activo</td>
+                        @foreach ($students as $student)
+                            <tr>
+                                <td>
+                                    <div class="d-flex justify-content-around">
+                                        <a href="#editEmployeeModal" class="edit" data-toggle="modal">
+                                            <i class="material-icons" data-toggle="tooltip" title="Editar">&#xE254;</i>
+                                        </a>
+                                        <a class="delete" href="#"
+                                            onclick="event.preventDefault();if(confirm('¿Estas seguro de eliminar a {{ $student->name }}?\nEsta acción no se podrá deshacer')){document.getElementById('delete-student-id').submit();}">
+                                            <i class="material-icons" data-toggle="tooltip" title="Eliminar">&#xE872;</i>
+                                        </a>
 
-
-                        </tr>
+                                        <form id="delete-student-id" method="POST" class="d-none">
+                                            @csrf
+                                            @method('delete')
+                                        </form>
+                                    </div>
+                                </td>
+                                <td><a href="AlumnoIndividual.html">{{ $student->name }}</a></td>
+                                <td>{{ $student->surname }}</td>
+                                <td>Insurance</td>
+                                <td>Bolivar 906, Montemorelos, NL</td>
+                                <td>82633450</td>
+                                <td>5</td>
+                                <td>7-8</td>
+                                <td>Activo</td>
+                            </tr>
+                        @endforeach
 
                     </tbody>
                 </table>
