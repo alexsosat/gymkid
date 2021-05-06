@@ -14,7 +14,8 @@ Route::group(['middleware' => 'auth'], function () {
         return view('index');
     });
 
-    Route::get('/alumnos', 'StudentsController@index')->name('students.index');
+    Route::get('/alumnos', 'StudentController@index')->name('students.index');
 });
+
 
 Auth::routes();

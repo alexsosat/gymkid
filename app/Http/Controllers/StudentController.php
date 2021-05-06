@@ -9,6 +9,6 @@ class StudentController extends Controller
 {
     public function index()
     {
-        return View('students.index')->with(['User' => Student::all()]);
+        return view('students.index');
     }
 }
